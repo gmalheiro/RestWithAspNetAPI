@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace RestWithAspNetAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class CalculatorController : ControllerBase
     {
