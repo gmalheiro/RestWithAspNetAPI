@@ -6,7 +6,7 @@ namespace RestWithAspNetAPI.Services
     {
         Person Create(Person person);
 
-        Person FindById(int id);
+        Person FindById(long id);
 
         List<Person> FindAll();
 

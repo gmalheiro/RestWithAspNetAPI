@@ -1,25 +1,34 @@
 ﻿using RestWithAspNetAPI.Models;
+using RestWithAspNetAPI.Services;
+using System.Collections.Generic;
+using System.Threading;
 
-namespace RestWithAspNetAPI.Services.Implementations
+namespace RestWithASPNETUdemy.Services.Implementations
 {
     public class PersonServiceImplementation : IPersonService
     {
-        public volatile int count;
-        
+        // Counter responsible for generating a fake ID
+        // since we are not accessing any database
+        private volatile int count;
+
+        // Method responsible for creating a new person.
+        // If we had a database this would be the time to persist the data
         public Person Create(Person person)
         {
             return person;
         }
 
-        public void Delete(int id)
+        // Method responsible for deleting a person from an ID
+        public void Delete(long id)
         {
-            
+            // Our exclusion logic would come here
         }
 
+        // Method responsible for returning all people,
+        // again this information is mocks
         public List<Person> FindAll()
         {
             List<Person> persons = new List<Person>();
-
             for (int i = 0; i < 8; i++)
             {
                 Person person = MockPerson(i);
@@ -28,17 +37,22 @@ namespace RestWithAspNetAPI.Services.Implementations
             return persons;
         }
 
-        public Person FindById(int id)
+        // Method responsible for returning a person
+        // as we have not accessed any database we are returning a mock
+        public Person FindByID(long id)
         {
-            return new Person 
+            return new Person
             {
-                Id = 1,
-                Name = "Gabriel Malheiro",
-                Address = "São Paulo - São Paulo - Brasil",
-                Gender  = "Male"
+                Id = IncrementAndGet(),
+                FirstName = "Leandro",
+                LastName = "Costa",
+                Address = "Uberlandia - Minas Gerais - Brasil",
+                Gender = "Male"
             };
         }
 
+        // Method responsible for updating a person for
+        // being mock we return the same information passed
         public Person Update(Person person)
         {
             return person;
@@ -49,15 +63,34 @@ namespace RestWithAspNetAPI.Services.Implementations
             return new Person
             {
                 Id = IncrementAndGet(),
-                Name = "Gabriel Malheiro",
-                Address = "São Paulo - São Paulo - Brasil",
+                FirstName = "Person Name" + i,
+                LastName = "Person LastName" + i,
+                Address = "Some Address" + i,
                 Gender = "Male"
             };
         }
 
-        private int IncrementAndGet()
+        private long IncrementAndGet()
         {
             return Interlocked.Increment(ref count);
+        }
+
+        public Person FindById(long id)
+        {
+            return new Person
+            {
+                Id = IncrementAndGet(),
+                FirstName = "Gabriel",
+                LastName = "Malheiro",
+                Address = "Some address",
+                Gender = "Male"
+
+            };
+        }
+
+        public void Delete(int id)
+        {
+            
         }
     }
 }
