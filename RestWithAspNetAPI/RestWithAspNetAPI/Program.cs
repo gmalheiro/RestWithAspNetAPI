@@ -1,3 +1,7 @@
+using Microsoft.EntityFrameworkCore;
+using RestWithAspNetAPI.Models.Context;
+using System;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -7,19 +11,26 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-var app = builder.Build();
+string MySQLConnectionString = builder?.Configuration?.GetConnectionString("MySQLConnectionString") ?? "";
+
+builder?.Services.AddDbContext<MySQLContext>(options =>
+                                            options.UseMySql(MySQLConnectionString,
+                                            ServerVersion.AutoDetect(MySQLConnectionString)
+                                            ));
+
+var app = builder?.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+if (app?.Environment?.IsDevelopment() ?? true)
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+app?.UseHttpsRedirection();
 
-app.UseAuthorization();
+app?.UseAuthorization();
 
-app.MapControllers();
+app?.MapControllers();
 
-app.Run();
+app?.Run();
