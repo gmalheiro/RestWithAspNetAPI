@@ -12,6 +12,6 @@ namespace RestWithAspNetAPI.Services
 
         Person Update(Person person);
 
-        void Delete(int id);    
+        Person Delete(int id);    
     }
 }

@@ -26,15 +26,12 @@ namespace RestWithASPNETUdemy.Controllers
 
         // Maps GET requests to https://localhost:{port}/api/person
         // Get no parameters for FindAll -> Search All
-        [HttpGet]
+        [HttpGet("FindAll")]
         public IActionResult Get()
         {
             return Ok(_personService.FindAll());
         }
 
-        // Maps GET requests to https://localhost:{port}/api/person/{id}
-        // receiving an ID as in the Request Path
-        // Get with parameters for FindById -> Search by ID
         [HttpGet("{id}")]
         public IActionResult Get(long id)
         {

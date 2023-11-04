@@ -1,4 +1,6 @@
-﻿using RestWithAspNetAPI.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using RestWithAspNetAPI.Models;
+using RestWithAspNetAPI.Models.Context;
 using RestWithAspNetAPI.Services;
 using System.Collections.Generic;
 using System.Threading;
@@ -7,90 +9,100 @@ namespace RestWithASPNETUdemy.Services.Implementations
 {
     public class PersonServiceImplementation : IPersonService
     {
-        // Counter responsible for generating a fake ID
-        // since we are not accessing any database
-        private volatile int count;
 
-        // Method responsible for creating a new person.
-        // If we had a database this would be the time to persist the data
+        private readonly MySQLContext? _mySQLContext;
+
+        public PersonServiceImplementation(MySQLContext mySQLContext)
+        {
+            _mySQLContext = mySQLContext;
+        }
+
         public Person Create(Person person)
         {
-            return person;
+            var personToBeInserted = person;
+
+            if (personToBeInserted is null)
+            {
+                return new Person();
+            }
+            else
+            {
+                _mySQLContext?.Add(personToBeInserted);
+                _mySQLContext?.SaveChanges();
+                return personToBeInserted;
+            }
+
         }
 
-        // Method responsible for deleting a person from an ID
-        public void Delete(long id)
-        {
-            // Our exclusion logic would come here
-        }
-
-        // Method responsible for returning all people,
-        // again this information is mocks
         public List<Person> FindAll()
         {
-            List<Person> persons = new List<Person>();
-            for (int i = 0; i < 8; i++)
-            {
-                Person person = MockPerson(i);
-                persons.Add(person);
-            }
-            return persons;
-        }
+            var people = new List<Person>();
 
-        // Method responsible for returning a person
-        // as we have not accessed any database we are returning a mock
-        public Person FindByID(long id)
-        {
-            return new Person
-            {
-                Id = IncrementAndGet(),
-                FirstName = "Leandro",
-                LastName = "Costa",
-                Address = "Uberlandia - Minas Gerais - Brasil",
-                Gender = "Male"
-            };
-        }
+            people = _mySQLContext?.Persons.ToList();
 
-        // Method responsible for updating a person for
-        // being mock we return the same information passed
-        public Person Update(Person person)
-        {
-            return person;
-        }
+            if (people?.Count > 0)
+                return people;
+            else
+                return new List<Person>();
 
-        private Person MockPerson(int i)
-        {
-            return new Person
-            {
-                Id = IncrementAndGet(),
-                FirstName = "Person Name" + i,
-                LastName = "Person LastName" + i,
-                Address = "Some Address" + i,
-                Gender = "Male"
-            };
-        }
-
-        private long IncrementAndGet()
-        {
-            return Interlocked.Increment(ref count);
         }
 
         public Person FindById(long id)
         {
-            return new Person
-            {
-                Id = IncrementAndGet(),
-                FirstName = "Gabriel",
-                LastName = "Malheiro",
-                Address = "Some address",
-                Gender = "Male"
+            var person = new Person();
 
-            };
+            person = _mySQLContext?.Persons.FirstOrDefault(p => p.Id == id);
+
+            if (person is null)
+                return new Person();
+            else return person;
         }
 
-        public void Delete(int id)
+        public Person Update(Person person)
         {
+            if (!Exists(person.Id)) return new Person();
+
+            var result = _mySQLContext?.Persons.SingleOrDefault(p => p.Id.Equals(person.Id));
+            if (result != null)
+            {
+                try
+                {
+                    // set changes and save
+                    _mySQLContext?.Entry(result).CurrentValues.SetValues(person);
+                    _mySQLContext?.SaveChanges();
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+            }
+            return person;
+
+        }
+
+        public Person Delete(int id)
+        {
+            var person = new Person();
+
+            person = _mySQLContext?.Persons.FirstOrDefault(p => p.Id == id);
+
+            if (person is null)
+            {
+                return new Person();
+            }
+            else
+            {
+                _mySQLContext?.Remove(person);
+                _mySQLContext?.SaveChanges();
+                return person;
+            }
+        }
+
+        private bool Exists(long id)
+        {
+            var personInDb = _mySQLContext?.Persons.Any(p => p.Id.Equals(id));
             
+            return personInDb.HasValue;
         }
     }
 }

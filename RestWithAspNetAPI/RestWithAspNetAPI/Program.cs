@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using RestWithAspNetAPI.Models.Context;
+using RestWithAspNetAPI.Services;
+using RestWithASPNETUdemy.Services.Implementations;
 using System;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +14,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 string MySQLConnectionString = builder?.Configuration?.GetConnectionString("MySQLConnectionString") ?? "";
+
+builder?.Services.AddScoped<IPersonService, PersonServiceImplementation>();
 
 builder?.Services.AddDbContext<MySQLContext>(options =>
                                             options.UseMySql(MySQLConnectionString,
