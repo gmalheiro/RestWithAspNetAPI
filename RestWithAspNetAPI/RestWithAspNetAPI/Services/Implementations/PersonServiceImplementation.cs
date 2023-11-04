@@ -1,4 +1,5 @@
-﻿using RestWithAspNetAPI.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using RestWithAspNetAPI.Models;
 using RestWithAspNetAPI.Models.Context;
 using RestWithAspNetAPI.Services;
 using System.Collections.Generic;
@@ -60,13 +61,13 @@ namespace RestWithASPNETUdemy.Services.Implementations
         public Person Update(Person person)
         {
             var personToBeUpdated = new Person();
-            
+
             if(person is null)
             {
                 return new Person();
-            }
+                }
             else
-            {
+                {
                 personToBeUpdated = _mySQLContext?.Persons.Find(person.Id) ?? new Person();
                 
                 personToBeUpdated.FirstName = person?.FirstName ?? "";
@@ -101,6 +102,13 @@ namespace RestWithASPNETUdemy.Services.Implementations
                 _mySQLContext?.SaveChanges();
                 return person;
             }
+        }
+
+        private bool Exists(long id)
+        {
+            var personInDb = _mySQLContext?.Persons.Any(p => p.Id.Equals(id));
+            
+            return personInDb.HasValue;
         }
     }
 }
