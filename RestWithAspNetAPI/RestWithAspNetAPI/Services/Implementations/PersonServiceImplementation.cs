@@ -60,29 +60,23 @@ namespace RestWithASPNETUdemy.Services.Implementations
 
         public Person Update(Person person)
         {
-            var personToBeUpdated = new Person();
+            if (!Exists(person.Id)) return new Person();
 
-            if(person is null)
+            var result = _mySQLContext?.Persons.SingleOrDefault(p => p.Id.Equals(person.Id));
+            if (result != null)
             {
-                return new Person();
-                }
-            else
+                try
                 {
-                personToBeUpdated = _mySQLContext?.Persons.Find(person.Id) ?? new Person();
-                
-                personToBeUpdated.FirstName = person?.FirstName ?? "";
-
-                personToBeUpdated.LastName = person?.LastName ?? "";
-
-                personToBeUpdated.Address = person?.Address ?? "";
-
-                personToBeUpdated.Gender = person?.Gender ?? "";
-
-                _mySQLContext?.SaveChanges();
-
-                return personToBeUpdated;
-
+                    // set changes and save
+                    _mySQLContext?.Entry(result).CurrentValues.SetValues(person);
+                    _mySQLContext?.SaveChanges();
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
             }
+            return person;
 
         }
 
