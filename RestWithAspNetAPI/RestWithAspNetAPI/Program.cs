@@ -15,6 +15,8 @@ builder.Services.AddSwaggerGen();
 
 string MySQLConnectionString = builder?.Configuration?.GetConnectionString("MySQLConnectionString") ?? "";
 
+builder?.Services.AddApiVersioning();
+
 builder?.Services.AddScoped<IPersonService, PersonServiceImplementation>();
 
 builder?.Services.AddDbContext<MySQLContext>(options =>
