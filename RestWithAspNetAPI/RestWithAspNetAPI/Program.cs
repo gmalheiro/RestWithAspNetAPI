@@ -1,8 +1,7 @@
 using Microsoft.EntityFrameworkCore;
+using RestWithAspNetAPI.Busines.Implementations;
+using RestWithAspNetAPI.Business;
 using RestWithAspNetAPI.Models.Context;
-using RestWithAspNetAPI.Services;
-using RestWithASPNETUdemy.Services.Implementations;
-using System;
 
 var builder = WebApplication.CreateBuilder(args);
 

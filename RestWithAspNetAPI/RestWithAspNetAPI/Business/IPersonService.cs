@@ -1,6 +1,6 @@
 ﻿using RestWithAspNetAPI.Models;
 
-namespace RestWithAspNetAPI.Services
+namespace RestWithAspNetAPI.Business
 {
     public interface IPersonService
     {

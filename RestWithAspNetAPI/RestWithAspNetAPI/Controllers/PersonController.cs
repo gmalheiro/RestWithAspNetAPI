@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using RestWithAspNetAPI.Models;
-using RestWithAspNetAPI.Services;
-using RestWithASPNETUdemy.Services;
+using RestWithAspNetAPI.Business;
 
 namespace RestWithASPNETUdemy.Controllers
 {

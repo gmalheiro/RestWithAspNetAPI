@@ -1,11 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using RestWithAspNetAPI.Business;
 using RestWithAspNetAPI.Models;
 using RestWithAspNetAPI.Models.Context;
-using RestWithAspNetAPI.Services;
-using System.Collections.Generic;
-using System.Threading;
 
-namespace RestWithASPNETUdemy.Services.Implementations
+namespace RestWithAspNetAPI.Busines.Implementations
 {
     public class PersonServiceImplementation : IPersonService
     {
@@ -101,7 +98,7 @@ namespace RestWithASPNETUdemy.Services.Implementations
         private bool Exists(long id)
         {
             var personInDb = _mySQLContext?.Persons.Any(p => p.Id.Equals(id));
-            
+
             return personInDb.HasValue;
         }
     }
