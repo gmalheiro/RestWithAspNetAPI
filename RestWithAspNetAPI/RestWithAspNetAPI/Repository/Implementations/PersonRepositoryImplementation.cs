@@ -2,14 +2,14 @@
 using RestWithAspNetAPI.Models;
 using RestWithAspNetAPI.Models.Context;
 
-namespace RestWithAspNetAPI.Busines.Implementations
+namespace RestWithAspNetAPI.Repository.Implementations
 {
-    public class PersonServiceImplementation : IPersonService
+    public class PersonRepositoryImplementation : IPersonService
     {
 
         private readonly MySQLContext? _mySQLContext;
 
-        public PersonServiceImplementation(MySQLContext mySQLContext)
+        public PersonRepositoryImplementation(MySQLContext mySQLContext)
         {
             _mySQLContext = mySQLContext;
         }
