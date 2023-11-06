@@ -2,7 +2,7 @@
 
 namespace RestWithAspNetAPI.Business
 {
-    public interface IPersonService
+    public interface IPersonBusiness
     {
         Person Create(Person person);
 

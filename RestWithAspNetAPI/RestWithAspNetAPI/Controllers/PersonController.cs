@@ -14,11 +14,11 @@ namespace RestWithASPNETUdemy.Controllers
         private readonly ILogger<PersonController> _logger;
 
         // Declaration of the service used
-        private IPersonService _personService;
+        private IPersonBusiness _personService;
 
         // Injection of an instance of IPersonService
         // when creating an instance of PersonController
-        public PersonController(ILogger<PersonController> logger, IPersonService personService)
+        public PersonController(ILogger<PersonController> logger, IPersonBusiness personService)
         {
             _logger = logger;
             _personService = personService;

@@ -4,7 +4,7 @@ using RestWithAspNetAPI.Models.Context;
 
 namespace RestWithAspNetAPI.Busines.Implementations
 {
-    public class PersonRepositoryImplementation : IPersonService
+    public class PersonRepositoryImplementation : IPersonBusiness
     {
 
         private readonly MySQLContext? _mySQLContext;
