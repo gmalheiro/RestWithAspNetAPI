@@ -2,7 +2,7 @@
 using RestWithAspNetAPI.Models;
 using RestWithAspNetAPI.Models.Context;
 
-namespace RestWithAspNetAPI.Busines.Implementations
+namespace RestWithAspNetAPI.Repository.Implementations
 {
     public class PersonRepositoryImplementation : IPersonService
     {

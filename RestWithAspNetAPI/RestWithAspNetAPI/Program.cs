@@ -16,7 +16,7 @@ string MySQLConnectionString = builder?.Configuration?.GetConnectionString("MySQ
 
 builder?.Services.AddApiVersioning();
 
-builder?.Services.AddScoped<IPersonService, PersonServiceImplementation>();
+builder?.Services.AddScoped<IPersonService, PersonRepositoryImplementation>();
 
 builder?.Services.AddDbContext<MySQLContext>(options =>
                                             options.UseMySql(MySQLConnectionString,
