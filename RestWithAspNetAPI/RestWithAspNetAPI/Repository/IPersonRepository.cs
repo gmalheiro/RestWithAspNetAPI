@@ -2,7 +2,7 @@
 
 namespace RestWithAspNetAPI.Repository
 {
-    public interface IPersonService
+    public interface IPersonRepository
     {
         Person Create(Person person);
 
