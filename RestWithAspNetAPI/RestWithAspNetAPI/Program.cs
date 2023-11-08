@@ -1,7 +1,11 @@
 using Microsoft.EntityFrameworkCore;
-using RestWithAspNetAPI.Busines.Implementations;
+using RestWithAspNetAPI.Business.Implementations;
 using RestWithAspNetAPI.Business;
 using RestWithAspNetAPI.Models.Context;
+using RestWithAspNetAPI.Repository;
+using RestWithAspNetAPI.Repository.Implementations;
+
+;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,7 +20,8 @@ string MySQLConnectionString = builder?.Configuration?.GetConnectionString("MySQ
 
 builder?.Services.AddApiVersioning();
 
-builder?.Services.AddScoped<IPersonBusiness, PersonRepositoryImplementation>();
+builder?.Services.AddScoped<IPersonBusiness,PersonBusinessImplementation>();
+builder?.Services.AddScoped<IPersonRepository, PersonRepositoryImplementation>();
 
 builder?.Services.AddDbContext<MySQLContext>(options =>
                                             options.UseMySql(MySQLConnectionString,

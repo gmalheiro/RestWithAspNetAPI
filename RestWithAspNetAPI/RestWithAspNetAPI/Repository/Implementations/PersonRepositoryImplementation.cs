@@ -95,7 +95,7 @@ namespace RestWithAspNetAPI.Repository.Implementations
             }
         }
 
-        private bool Exists(long id)
+        public bool Exists(long id)
         {
             var personInDb = _mySQLContext?.Persons.Any(p => p.Id.Equals(id));
 
