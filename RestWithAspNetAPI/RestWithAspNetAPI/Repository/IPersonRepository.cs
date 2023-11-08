@@ -12,6 +12,8 @@ namespace RestWithAspNetAPI.Repository
 
         Person Update(Person person);
 
-        Person Delete(int id);    
+        Person Delete(int id);
+
+        bool Exists(long id);
     }
 }
