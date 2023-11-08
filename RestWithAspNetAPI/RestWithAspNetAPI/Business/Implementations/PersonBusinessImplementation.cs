@@ -1,105 +1,47 @@
 ﻿using RestWithAspNetAPI.Business;
 using RestWithAspNetAPI.Models;
 using RestWithAspNetAPI.Models.Context;
+using RestWithAspNetAPI.Repository;
 
-namespace RestWithAspNetAPI.Busines.Implementations
+namespace RestWithAspNetAPI.Business.Implementations
 {
-    public class PersonRepositoryImplementation : IPersonBusiness
+    public class PersonBusinessImplementation : IPersonBusiness
     {
 
-        private readonly MySQLContext? _mySQLContext;
+        private readonly IPersonRepository _personRepository;
 
-        public PersonRepositoryImplementation(MySQLContext mySQLContext)
+        public PersonBusinessImplementation(IPersonRepository personRepository)
         {
-            _mySQLContext = mySQLContext;
+            _personRepository = personRepository;
         }
 
         public Person Create(Person person)
         {
-            var personToBeInserted = person;
-
-            if (personToBeInserted is null)
-            {
-                return new Person();
-            }
-            else
-            {
-                _mySQLContext?.Add(personToBeInserted);
-                _mySQLContext?.SaveChanges();
-                return personToBeInserted;
-            }
-
+            _personRepository.Create(person);
+            return person;
         }
 
         public List<Person> FindAll()
         {
-            var people = new List<Person>();
-
-            people = _mySQLContext?.Persons.ToList();
-
-            if (people?.Count > 0)
-                return people;
-            else
-                return new List<Person>();
-
+           return _personRepository.FindAll();
         }
 
         public Person FindById(long id)
         {
-            var person = new Person();
-
-            person = _mySQLContext?.Persons.FirstOrDefault(p => p.Id == id);
-
-            if (person is null)
-                return new Person();
-            else return person;
+            return _personRepository.FindById(id);
         }
 
         public Person Update(Person person)
         {
-            if (!Exists(person.Id)) return new Person();
-
-            var result = _mySQLContext?.Persons.SingleOrDefault(p => p.Id.Equals(person.Id));
-            if (result != null)
-            {
-                try
-                {
-                    // set changes and save
-                    _mySQLContext?.Entry(result).CurrentValues.SetValues(person);
-                    _mySQLContext?.SaveChanges();
-                }
-                catch (Exception)
-                {
-                    throw;
-                }
-            }
+           _personRepository.Update(person);
             return person;
-
         }
 
         public Person Delete(int id)
         {
-            var person = new Person();
-
-            person = _mySQLContext?.Persons.FirstOrDefault(p => p.Id == id);
-
-            if (person is null)
-            {
-                return new Person();
-            }
-            else
-            {
-                _mySQLContext?.Remove(person);
-                _mySQLContext?.SaveChanges();
-                return person;
-            }
-        }
-
-        private bool Exists(long id)
-        {
-            var personInDb = _mySQLContext?.Persons.Any(p => p.Id.Equals(id));
-
-            return personInDb.HasValue;
+            var person = _personRepository.FindById(id);
+            _personRepository.Delete(id);
+            return person;
         }
     }
 }
