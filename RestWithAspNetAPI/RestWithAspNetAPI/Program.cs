@@ -5,8 +5,6 @@ using RestWithAspNetAPI.Models.Context;
 using RestWithAspNetAPI.Repository;
 using RestWithAspNetAPI.Repository.Implementations;
 
-;
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
