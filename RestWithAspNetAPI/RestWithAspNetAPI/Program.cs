@@ -4,8 +4,7 @@ using RestWithAspNetAPI.Business;
 using RestWithAspNetAPI.Models.Context;
 using RestWithAspNetAPI.Repository;
 using RestWithAspNetAPI.Repository.Implementations;
-
-;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,6 +26,12 @@ builder?.Services.AddDbContext<MySQLContext>(options =>
                                             options.UseMySql(MySQLConnectionString,
                                             ServerVersion.AutoDetect(MySQLConnectionString)
                                             ));
+
+builder?.Host.UseSerilog((hostingContext, loggerConfiguration) =>
+{
+    loggerConfiguration
+        .WriteTo.Console();
+});
 
 var app = builder?.Build();
 
