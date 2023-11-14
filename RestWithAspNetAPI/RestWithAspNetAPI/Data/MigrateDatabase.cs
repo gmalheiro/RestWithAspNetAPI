@@ -13,7 +13,7 @@ namespace RestWithAspNetAPI.Data
                 var evolveConnection = new MySqlConnection(connection);
                 var evolve = new Evolve(evolveConnection, msg => Log.Information(msg))
                 {
-                    Locations = new List<string> { "db/migrations", "db/dataset" },
+                    Locations = new List<string> { "Data/db/migrations", "Data/db/dataset" },
                     IsEraseDisabled = true,
                 };
                 evolve.Migrate();
