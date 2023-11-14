@@ -1,10 +1,18 @@
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using RestWithAspNetAPI.Business.Implementations;
 using RestWithAspNetAPI.Business;
 using RestWithAspNetAPI.Models.Context;
-using RestWithAspNetAPI.Repository;
 using RestWithAspNetAPI.Repository.Implementations;
+using RestWithAspNetAPI.Repository;
 using Serilog;
+using System;
+using System.Collections.Generic;
+using RestWithAspNetAPI.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -40,6 +48,8 @@ if (app?.Environment?.IsDevelopment() ?? true)
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+
+    MigrateDatabase.MigrateDb(MySQLConnectionString);
 }
 
 app?.UseHttpsRedirection();
