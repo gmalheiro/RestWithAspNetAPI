@@ -44,28 +44,28 @@ namespace RestWithAspNetAPI.Repository.Implementations
 
         }
 
-        public Person FindById(long id)
+        public Book FindById(long id)
         {
-            var person = new Person();
+            var book = new Book();
 
-            person = _mySQLContext?.Persons.FirstOrDefault(p => p.Id == id);
+            book = _mySQLContext?.Books.FirstOrDefault(b => b.Id == id);
 
-            if (person is null)
-                return new Person();
-            else return person;
+            if (book is null)
+                return new Book();
+
+            else return book;
         }
 
-        public Person Update(Person person)
+        public Book Update(Book book)
         {
-            if (!Exists(person.Id)) return new Person();
+            if (!Exists(book.Id)) return new Book();
 
-            var result = _mySQLContext?.Persons.SingleOrDefault(p => p.Id.Equals(person.Id));
+            var result = _mySQLContext?.Books.SingleOrDefault(b => b.Id.Equals(book.Id));
             if (result != null)
             {
                 try
                 {
-                    // set changes and save
-                    _mySQLContext?.Entry(result).CurrentValues.SetValues(person);
+                    _mySQLContext?.Entry(result).CurrentValues.SetValues(book);
                     _mySQLContext?.SaveChanges();
                 }
                 catch (Exception)
@@ -73,31 +73,31 @@ namespace RestWithAspNetAPI.Repository.Implementations
                     throw;
                 }
             }
-            return person;
+            return book;
 
         }
 
-        public Person Delete(int id)
+        public Book Delete(int id)
         {
-            var person = new Person();
+            var book = new Book();
 
-            person = _mySQLContext?.Persons.FirstOrDefault(p => p.Id == id);
+            book = _mySQLContext?.Books.FirstOrDefault(b => b.Id == id);
 
-            if (person is null)
+            if (book is null)
             {
-                return new Person();
+                return new Book();
             }
             else
             {
-                _mySQLContext?.Remove(person);
+                _mySQLContext?.Remove(book);
                 _mySQLContext?.SaveChanges();
-                return person;
+                return book;
             }
         }
 
         public bool Exists(long id)
         {
-            var personInDb = _mySQLContext?.Persons.Any(p => p.Id.Equals(id));
+            var personInDb = _mySQLContext?.Books.Any(b => b.Id.Equals(id));
 
             return personInDb.HasValue;
         }
