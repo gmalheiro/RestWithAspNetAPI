@@ -2,7 +2,7 @@
 
 namespace RestWithAspNetAPI.Models
 {
-    [Table("book")]
+    [Table("books")]
     public class Book
     {
         [Column("id")]
