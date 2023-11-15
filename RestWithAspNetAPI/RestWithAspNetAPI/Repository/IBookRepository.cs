@@ -2,17 +2,17 @@
 
 namespace RestWithAspNetAPI.Repository
 {
-    public interface IBokRepository
+    public interface IBookRepository
     {
-        Person Create(Book book);
+        Book Create(Book book);
 
-        Person FindById(long id);
+        Book FindById(long id);
 
-        List<Person> FindAll();
+        List<Book> FindAll();
 
-        Person Update(Book book);
+        Book Update(Book book);
 
-        Person Delete(int id);
+        Book Delete(int id);
 
         bool Exists(long id);
     }
