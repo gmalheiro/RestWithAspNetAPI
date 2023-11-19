@@ -64,17 +64,66 @@ namespace RestWithAspNetAPI.Repository.Generic
 
         public List<T> FindAll()
         {
-            throw new NotImplementedException();
+            var item = new List<T>();
+            
+            try
+            {
+
+                item = dataset.ToList();
+
+                return item;
+            }
+            catch (Exception e)
+            {
+
+                Console.WriteLine(e.Message);
+                return item;
+            }
+
         }
 
         public T FindById(long id)
         {
-            throw new NotImplementedException();
+            T item ;
+
+            try
+            {
+                item = dataset.FirstOrDefault(i => i.Id == id);
+                return item;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                item = null;
+                return item;
+            }
+
         }
 
         public T Update(T item)
         {
-            throw new NotImplementedException();
+            T result;
+
+            result = dataset.SingleOrDefault(i => i.Equals(item.Id));
+
+            if (result != null)
+            {
+                try
+                {
+                    _context.Entry(result).CurrentValues.SetValues(item);
+                    _context.SaveChanges();
+                    return result;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    return result;
+                }
+            }
+            else
+            {
+                return result;
+            }
         }
     }
 }
