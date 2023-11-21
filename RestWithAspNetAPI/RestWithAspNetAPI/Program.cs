@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using RestWithAspNetAPI.Business;
 using RestWithAspNetAPI.Business.Implementations;
 using RestWithAspNetAPI.Data;
+using RestWithAspNetAPI.Models;
 using RestWithAspNetAPI.Models.Context;
 using RestWithAspNetAPI.Repository;
 using RestWithAspNetAPI.Repository.Generic;
@@ -21,11 +22,9 @@ string MySQLConnectionString = builder?.Configuration?.GetConnectionString("MySQ
 
 builder?.Services.AddApiVersioning();
 
+//Dependency injection
 builder?.Services.AddScoped<IPersonBusiness, PersonBusinessImplementation>();
-builder?.Services.AddScoped<IPersonRepository, PersonRepositoryImplementation>();
-
 builder?.Services.AddScoped<IBookBusiness, BookBusinessImplementation>();
-builder?.Services.AddScoped<IBookRepository, BookRepositoryImplementation>();
 
 builder?.Services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
 
