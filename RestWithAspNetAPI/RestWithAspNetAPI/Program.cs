@@ -1,18 +1,13 @@
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using RestWithAspNetAPI.Business.Implementations;
 using RestWithAspNetAPI.Business;
-using RestWithAspNetAPI.Models.Context;
-using RestWithAspNetAPI.Repository.Implementations;
-using RestWithAspNetAPI.Repository;
-using Serilog;
-using System;
-using System.Collections.Generic;
+using RestWithAspNetAPI.Business.Implementations;
 using RestWithAspNetAPI.Data;
+using RestWithAspNetAPI.Models;
+using RestWithAspNetAPI.Models.Context;
+using RestWithAspNetAPI.Repository;
+using RestWithAspNetAPI.Repository.Generic;
+using RestWithAspNetAPI.Repository.Implementations;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,11 +22,11 @@ string MySQLConnectionString = builder?.Configuration?.GetConnectionString("MySQ
 
 builder?.Services.AddApiVersioning();
 
-builder?.Services.AddScoped<IPersonBusiness,PersonBusinessImplementation>();
-builder?.Services.AddScoped<IPersonRepository, PersonRepositoryImplementation>();
-
+//Dependency injection
+builder?.Services.AddScoped<IPersonBusiness, PersonBusinessImplementation>();
 builder?.Services.AddScoped<IBookBusiness, BookBusinessImplementation>();
-builder?.Services.AddScoped<IBookRepository, BookRepositoryImplementation>();
+
+builder?.Services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
 
 builder?.Services.AddDbContext<MySQLContext>(options =>
                                             options.UseMySql(MySQLConnectionString,
