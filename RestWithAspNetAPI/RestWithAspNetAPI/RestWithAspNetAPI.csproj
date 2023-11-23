@@ -24,7 +24,6 @@
 
   <ItemGroup>
     <Folder Include="Data\Converter\Implementations\" />
-    <Folder Include="Data\VO\" />
   </ItemGroup>
 
 </Project>
