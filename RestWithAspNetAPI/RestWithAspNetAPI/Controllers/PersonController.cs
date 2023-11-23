@@ -3,7 +3,7 @@ using Microsoft.Extensions.Logging;
 using RestWithAspNetAPI.Models;
 using RestWithAspNetAPI.Business;
 
-namespace RestWithASPNETUdemy.Controllers
+namespace RestWithAspNetAPI.Controllers
 {
     [ApiVersion("1")]
     [ApiController]
