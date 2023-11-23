@@ -1,8 +1,4 @@
-﻿using RestWithAspNetAPI.Models.Base;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace RestWithAspNetAPI.Data.VO;
-
+﻿namespace RestWithAspNetAPI.Data.VO;
 public class PersonVo
 {
     public long Id { get; set; }
