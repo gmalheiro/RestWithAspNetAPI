@@ -1,5 +1,5 @@
 ﻿namespace RestWithAspNetAPI.Data.VO;
-public class PersonVo
+public class PersonVO
 {
     public long Id { get; set; }
     public string? FirstName { get; set; }
