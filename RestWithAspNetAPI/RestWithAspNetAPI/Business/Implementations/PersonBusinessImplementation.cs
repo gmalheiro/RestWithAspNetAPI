@@ -1,4 +1,5 @@
 ﻿using RestWithAspNetAPI.Business;
+using RestWithAspNetAPI.Data.VO;
 using RestWithAspNetAPI.Models;
 using RestWithAspNetAPI.Models.Context;
 using RestWithAspNetAPI.Repository;
@@ -9,10 +10,12 @@ namespace RestWithAspNetAPI.Business.Implementations
     {
 
         private readonly IRepository<Person> _personRepository;
+        private readonly PersonVO _personVo;
 
-        public PersonBusinessImplementation(IRepository<Person> personRepository)
+        public PersonBusinessImplementation(IRepository<Person> personRepository, PersonVO personVo)
         {
             _personRepository = personRepository;
+            _personVo = personVo;
         }
 
         public Person Create(Person person)
