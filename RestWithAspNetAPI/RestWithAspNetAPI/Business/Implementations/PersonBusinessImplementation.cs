@@ -1,4 +1,5 @@
 ﻿using RestWithAspNetAPI.Business;
+using RestWithAspNetAPI.Data.Converter.Implementations;
 using RestWithAspNetAPI.Data.VO;
 using RestWithAspNetAPI.Models;
 using RestWithAspNetAPI.Models.Context;
@@ -10,12 +11,12 @@ namespace RestWithAspNetAPI.Business.Implementations
     {
 
         private readonly IRepository<Person> _personRepository;
-        private readonly PersonVO _personVo;
+        private readonly PersonConverter _converter ;
 
-        public PersonBusinessImplementation(IRepository<Person> personRepository, PersonVO personVo)
+        public PersonBusinessImplementation(IRepository<Person> personRepository,PersonConverter converter)
         {
             _personRepository = personRepository;
-            _personVo = personVo;
+            _converter= converter;
         }
 
         public Person Create(Person person)
