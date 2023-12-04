@@ -1,4 +1,6 @@
 ﻿using RestWithAspNetAPI.Business;
+using RestWithAspNetAPI.Data.Converter.Implementations;
+using RestWithAspNetAPI.Data.VO;
 using RestWithAspNetAPI.Models;
 using RestWithAspNetAPI.Models.Context;
 using RestWithAspNetAPI.Repository;
@@ -9,39 +11,46 @@ namespace RestWithAspNetAPI.Business.Implementations
     {
 
         private readonly IRepository<Book> _bookRepository;
+        private readonly BookConverter _converter;
 
-        public BookBusinessImplementation(IRepository<Book> bookRepository )
+        public BookBusinessImplementation(IRepository<Book> bookRepository , BookConverter converter)
         {
             _bookRepository = bookRepository;
+            _converter = converter;
         }
 
-        public Book Create(Book  book)
+        public BookVO Create(BookVO  book)
         {
-            _bookRepository.Create(book);
+            var bookEntity = _converter.Parse(book);
+            _bookRepository.Create(bookEntity);
             return book;
         }
 
-        public List<Book> FindAll()
+        public List<BookVO> FindAll()
         {
-           return _bookRepository.FindAll();
+            var books = _converter.Parse(_bookRepository.FindAll());
+            return books;
         }
 
-        public Book FindById(long id)
+        public BookVO FindById(long id)
         {
-            return _bookRepository.FindById(id);
+            var bookVO = _converter.Parse(_bookRepository.FindById(id));
+            return bookVO;
         }
 
-        public Book Update(Book book)
+        public BookVO Update(BookVO book)
         {
-           _bookRepository.Update(book);
+            var bookEntity= _converter.Parse(book);
+            _bookRepository.Update(bookEntity);
             return book;
         }
 
-        public Book Delete(int id)
+        public BookVO Delete(int id)
         {
             var book = _bookRepository.FindById(id);
             _bookRepository.Delete(id);
-            return book;
+            var bookVO = _converter.Parse(book);    
+            return bookVO;
         }
     }
 }
