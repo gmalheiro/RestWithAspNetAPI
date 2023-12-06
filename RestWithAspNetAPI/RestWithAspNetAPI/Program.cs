@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using RestWithAspNetAPI.Business;
 using RestWithAspNetAPI.Business.Implementations;
 using RestWithAspNetAPI.Data;
+using RestWithAspNetAPI.Data.Converter.Implementations;
 using RestWithAspNetAPI.Models;
 using RestWithAspNetAPI.Models.Context;
 using RestWithAspNetAPI.Repository;
@@ -26,7 +27,10 @@ builder?.Services.AddApiVersioning();
 builder?.Services.AddScoped<IPersonBusiness, PersonBusinessImplementation>();
 builder?.Services.AddScoped<IBookBusiness, BookBusinessImplementation>();
 
-builder?.Services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
+builder?.Services?.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
+
+builder?.Services.AddScoped<PersonConverter>();
+builder?.Services.AddScoped<BookConverter>();
 
 builder?.Services.AddDbContext<MySQLContext>(options =>
                                             options.UseMySql(MySQLConnectionString,
