@@ -38,7 +38,7 @@ builder?.Services.AddDbContext<MySQLContext>(options =>
                                             ServerVersion.AutoDetect(MySQLConnectionString)
                                             ));
 
-builder.Services.AddMvc(options =>
+builder?.Services.AddMvc(options =>
 {
     options.RespectBrowserAcceptHeader = true;
 
