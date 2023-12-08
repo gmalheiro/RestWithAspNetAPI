@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Net.Http.Headers;
 using RestWithAspNetAPI.Business;
 using RestWithAspNetAPI.Business.Implementations;
 using RestWithAspNetAPI.Data;
@@ -36,6 +37,15 @@ builder?.Services.AddDbContext<MySQLContext>(options =>
                                             options.UseMySql(MySQLConnectionString,
                                             ServerVersion.AutoDetect(MySQLConnectionString)
                                             ));
+
+builder?.Services.AddMvc(options =>
+{
+    options.RespectBrowserAcceptHeader = true;
+
+    options.FormatterMappings.SetMediaTypeMappingForFormat("xml", MediaTypeHeaderValue.Parse("application/xml"));
+    options.FormatterMappings.SetMediaTypeMappingForFormat("json", MediaTypeHeaderValue.Parse("application/json"));
+})
+.AddXmlSerializerFormatters();
 
 builder?.Host.UseSerilog((hostingContext, loggerConfiguration) =>
 {
