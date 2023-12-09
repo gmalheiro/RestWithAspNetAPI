@@ -53,7 +53,7 @@ namespace RestWithAspNetAPI.Repository.Generic
             }
             else
             {
-                return itemToBeFound;
+                return itemToBeFound!;
             }
         }
 
@@ -88,13 +88,13 @@ namespace RestWithAspNetAPI.Repository.Generic
 
             try
             {
-                item = dataset.FirstOrDefault(i => i.Id == id);
+                item = dataset?.FirstOrDefault(i => i.Id == id)!;
                 return item;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                item = null;
+                item = null!;
                 return item;
             }
 
@@ -104,7 +104,7 @@ namespace RestWithAspNetAPI.Repository.Generic
         {
             T result;
 
-            result = dataset.SingleOrDefault(i => i.Equals(item.Id));
+            result = dataset?.SingleOrDefault(i => i.Equals(item.Id))!;
 
             if (result != null)
             {
@@ -122,7 +122,7 @@ namespace RestWithAspNetAPI.Repository.Generic
             }
             else
             {
-                return result;
+                return result!;
             }
         }
     }
