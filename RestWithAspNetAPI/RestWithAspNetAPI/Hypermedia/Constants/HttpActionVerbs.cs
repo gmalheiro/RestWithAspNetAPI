@@ -1,6 +1,6 @@
 ﻿namespace RestWithAspNetAPI.Hypermedia.Constants
 {
-    public class HttpActionVerbs
+    public sealed class HttpActionVerbs
     {
         public const string GET = "GET";
         public const string POST = "POST";
