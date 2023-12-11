@@ -4,6 +4,8 @@ using RestWithAspNetAPI.Business;
 using RestWithAspNetAPI.Business.Implementations;
 using RestWithAspNetAPI.Data;
 using RestWithAspNetAPI.Data.Converter.Implementations;
+using RestWithAspNetAPI.Hypermedia.Enricher;
+using RestWithAspNetAPI.Hypermedia.Filters;
 using RestWithAspNetAPI.Models;
 using RestWithAspNetAPI.Models.Context;
 using RestWithAspNetAPI.Repository;
@@ -21,6 +23,14 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 string MySQLConnectionString = builder?.Configuration?.GetConnectionString("MySQLConnectionString") ?? "";
+
+var filterOptions = new HyperMediaFilterOptions();
+
+filterOptions.ContentResponseEnricherList.Add(new PersonEnricher());
+
+filterOptions.ContentResponseEnricherList.Add(new BookEnricher());
+
+builder?.Services.AddSingleton(filterOptions);
 
 builder?.Services.AddApiVersioning();
 
@@ -68,5 +78,6 @@ app?.UseHttpsRedirection();
 app?.UseAuthorization();
 
 app?.MapControllers();
+app?.MapControllerRoute("DefaultApi", "{controller=values}/v{version=apiVersion}/{id?}");
 
 app?.Run();
