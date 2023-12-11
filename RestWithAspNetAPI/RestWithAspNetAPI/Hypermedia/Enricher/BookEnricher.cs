@@ -9,7 +9,7 @@ namespace RestWithAspNetAPI.Hypermedia.Enricher
     {
         protected override Task EnrichModel(BookVO content, IUrlHelper urlHelper)
         {
-            var path = "api/book";
+            var path = "api/Book";
             string link = GetLink(content.Id, urlHelper, path);
 
             content.Links.Add(new HyperMediaLink()
