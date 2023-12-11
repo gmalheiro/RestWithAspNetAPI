@@ -9,7 +9,7 @@ namespace RestWithAspNetAPI.Hypermedia.Enricher
     {
         protected override Task EnrichModel(PersonVO content, IUrlHelper urlHelper)
         {
-            var path = "api/person";
+            var path = "api/Person";
             string link = GetLink(content.Id, urlHelper, path);
 
             content.Links.Add(new HyperMediaLink()
