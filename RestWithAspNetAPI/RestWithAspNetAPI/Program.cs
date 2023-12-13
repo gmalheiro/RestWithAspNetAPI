@@ -34,6 +34,13 @@ builder?.Services.AddSingleton(filterOptions);
 
 builder?.Services.AddApiVersioning();
 
+builder?.Services.AddCors(options => options.AddDefaultPolicy(builder =>
+{
+    builder.AllowAnyOrigin()
+    .AllowAnyMethod()
+    .AllowAnyHeader();
+}));
+
 //Dependency injection
 builder?.Services.AddScoped<IPersonBusiness, PersonBusinessImplementation>();
 builder?.Services.AddScoped<IBookBusiness, BookBusinessImplementation>();
@@ -74,6 +81,8 @@ if (app?.Environment?.IsDevelopment() ?? true)
 }
 
 app?.UseHttpsRedirection();
+
+app?.UseCors();
 
 app?.UseAuthorization();
 
