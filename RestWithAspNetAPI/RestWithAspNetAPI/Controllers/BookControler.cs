@@ -29,6 +29,10 @@ namespace RestWithAspNetApi.Controllers
         // Maps GET requests to https://localhost:{port}/api/person
         // Get no parameters for FindAll -> Search All
         [HttpGet("FindAll")]
+        [ProducesResponseType(typeof(List<BookVO>), 200)]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
         [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Get()
         {
@@ -36,6 +40,10 @@ namespace RestWithAspNetApi.Controllers
         }
 
         [HttpGet("{id}")]
+        [ProducesResponseType(typeof(BookVO), 200)]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
         [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Get(long id)
         {
@@ -47,6 +55,9 @@ namespace RestWithAspNetApi.Controllers
         // Maps POST requests to https://localhost:{port}/api/person/
         // [FromBody] consumes the JSON object sent in the request body
         [HttpPost]
+        [ProducesResponseType(typeof(BookVO), 200)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
         [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Post([FromBody] BookVO book)
         {
@@ -57,6 +68,9 @@ namespace RestWithAspNetApi.Controllers
         // Maps PUT requests to https://localhost:{port}/api/person/
         // [FromBody] consumes the JSON object sent in the request body
         [HttpPut]
+        [ProducesResponseType(typeof(BookVO), 200)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
         [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Put([FromBody] BookVO book)
         {
@@ -67,6 +81,10 @@ namespace RestWithAspNetApi.Controllers
         // Maps DELETE requests to https://localhost:{port}/api/person/{id}
         // receiving an ID as in the Request Path
         [HttpDelete("{id}")]
+        [ProducesResponseType(typeof(BookVO), 200)]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
         public IActionResult Delete(int id)
         {
             _bookBusiness.Delete(id);
