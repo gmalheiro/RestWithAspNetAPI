@@ -7,7 +7,7 @@ using System.Security.Claims;
 
 namespace RestWithAspNetAPI.Business.Implementations
 {
-    public class LoginBusinessImplementation
+    public class LoginBusinessImplementation : ILoginBusiness
     {
         private const string DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
         private TokenConfiguration _configuration;
