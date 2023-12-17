@@ -6,11 +6,9 @@ using RestWithAspNetAPI.Data;
 using RestWithAspNetAPI.Data.Converter.Implementations;
 using RestWithAspNetAPI.Hypermedia.Enricher;
 using RestWithAspNetAPI.Hypermedia.Filters;
-using RestWithAspNetAPI.Models;
 using RestWithAspNetAPI.Models.Context;
 using RestWithAspNetAPI.Repository;
 using RestWithAspNetAPI.Repository.Generic;
-using RestWithAspNetAPI.Repository.Implementations;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
