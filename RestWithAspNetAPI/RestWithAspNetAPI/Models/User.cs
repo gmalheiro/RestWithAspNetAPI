@@ -18,6 +18,6 @@ namespace RestWithAspNetAPI.Models
         [Column("refresh_token")]
         public string? RefreshToken { get; set; }
         [Column("refresh_token_expiry_type")]
-        public DateTime RefreshTokenExpiryType { get; set; }
+        public DateTime RefreshTokenExpiryTime { get; set; }
     }
 }
