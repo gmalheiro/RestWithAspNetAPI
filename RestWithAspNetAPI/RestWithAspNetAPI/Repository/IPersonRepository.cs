@@ -2,18 +2,8 @@
 
 namespace RestWithAspNetAPI.Repository
 {
-    public interface IPersonRepository
+    public interface IPersonRepository : IRepository<Person>
     {
-        Person Create(Person person);
-
-        Person FindById(long id);
-
-        List<Person> FindAll();
-
-        Person Update(Person person);
-
-        Person Delete(int id);
-
-        bool Exists(long id);
+        Person Disable (long id);
     }
 }
