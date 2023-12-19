@@ -10,10 +10,10 @@ namespace RestWithAspNetAPI.Business.Implementations
     public class PersonBusinessImplementation : IPersonBusiness
     {
 
-        private readonly IRepository<Person> _personRepository;
+        private readonly IPersonRepository _personRepository;
         private readonly PersonConverter _converter ;
 
-        public PersonBusinessImplementation(IRepository<Person> personRepository,PersonConverter converter)
+        public PersonBusinessImplementation(IPersonRepository personRepository,PersonConverter converter)
         {
             _personRepository = personRepository;
             _converter= converter;
@@ -44,6 +44,12 @@ namespace RestWithAspNetAPI.Business.Implementations
             var personEntity = _converter.Parse(person);
             _personRepository.Update(personEntity);
             return person;
+        }
+
+        public PersonVO Disable(long id)
+        {
+            var personEntity = _personRepository.Disable(id);
+            return _converter.Parse(personEntity);
         }
 
         public PersonVO Delete(int id)
