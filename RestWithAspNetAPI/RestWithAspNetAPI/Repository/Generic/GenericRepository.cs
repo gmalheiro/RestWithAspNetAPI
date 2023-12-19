@@ -8,7 +8,7 @@ namespace RestWithAspNetAPI.Repository.Generic
     public class GenericRepository<T> : IRepository<T> where T : BaseEntity
     {
 
-        private readonly MySQLContext _context;
+        protected readonly MySQLContext _context;
 
         private DbSet<T> dataset;    
 
