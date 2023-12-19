@@ -13,6 +13,8 @@ namespace RestWithAspNetAPI.Business
 
         PersonVO Update(PersonVO person);
 
+        PersonVO Disable(long id);
+
         PersonVO Delete(int id);    
     }
 }
