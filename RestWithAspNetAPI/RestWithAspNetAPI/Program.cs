@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.Net.Http.Headers;
@@ -48,6 +49,8 @@ builder?.Services.AddCors(options => options.AddDefaultPolicy(builder =>
 }));
 
 //Dependency injection
+builder?.Services.TryAddSingleton<IHttpContextAccessor,HttpContextAccessor>();
+
 builder?.Services.AddScoped<IPersonBusiness, PersonBusinessImplementation>();
 
 builder?.Services.AddScoped<IBookBusiness, BookBusinessImplementation>();
@@ -58,6 +61,7 @@ builder?.Services.AddScoped<IUserRepository, UserRepository>();
 
 builder?.Services.AddScoped<IPersonRepository, PersonRepository>();
 
+builder?.Services.AddScoped<IFileBusiness,FileBusinessImplementation>();
 
 builder?.Services.AddTransient<ITokenService, TokenService>();
 
