@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  restwithaspnetapi:
+    image: ${DOCKER_REGISTRY-}restwithaspnetapi
+    build:
+      context: .
+      dockerfile: RestWithAspNetAPI/Dockerfile
