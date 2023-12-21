@@ -130,7 +130,7 @@ var app = builder?.Build();
 // Configure the HTTP request pipeline.
 if (app?.Environment?.IsDevelopment() ?? true)
 {
-    MigrateDatabase.MigrateDb(MySQLConnectionString);
+    //MigrateDatabase.MigrateDb(MySQLConnectionString);
     app.UseSwagger();
     app.UseSwaggerUI();
 }
