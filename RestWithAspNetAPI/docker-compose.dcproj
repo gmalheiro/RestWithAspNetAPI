@@ -7,7 +7,7 @@
     <ProjectGuid>d8c82716-5f42-4de3-9570-47926ea1c962</ProjectGuid>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
     <DockerServiceUrl>{Scheme}://localhost:{ServicePort}/swagger</DockerServiceUrl>
-    <DockerServiceName>restwithaspnetapi</DockerServiceName>
+    <DockerServiceName>rest-with-asp-net-api</DockerServiceName>
   </PropertyGroup>
   <ItemGroup>
     <None Include="docker-compose.yml" />
