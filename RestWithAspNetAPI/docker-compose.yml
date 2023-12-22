@@ -28,8 +28,7 @@ services:
       TZ: America/Sao_Paulo
       ASPNETCORE_ENVIRONMENT: Production
     ports:
-      - 4430:8080
-      - 44398:8081
+      - 44398:80
     depends_on:
       - db
     networks:
