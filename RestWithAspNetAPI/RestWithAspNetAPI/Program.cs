@@ -29,7 +29,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-string MySQLConnectionString = builder?.Configuration?.GetConnectionString("MySQLConnectionString") ?? "";
+string MSSQLConnectionString = builder?.Configuration?.GetConnectionString("MSSQLConnectionString") ?? "";
 
 var filterOptions = new HyperMediaFilterOptions();
 
@@ -70,10 +70,7 @@ builder?.Services?.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>))
 builder?.Services.AddScoped<PersonConverter>();
 builder?.Services.AddScoped<BookConverter>();
 
-builder?.Services.AddDbContext<MSSQLContext>(options =>
-                                            options.UseMySql(MySQLConnectionString,
-                                            ServerVersion.AutoDetect(MySQLConnectionString)
-                                            ));
+builder?.Services.AddDbContext<MSSQLContext>(options =>options.UseSqlServer(MSSQLConnectionString));
 
 var tokenConfigurations = new TokenConfiguration();
 
@@ -130,7 +127,7 @@ var app = builder?.Build();
 // Configure the HTTP request pipeline.
 if (app?.Environment?.IsDevelopment() ?? true)
 {
-    MigrateDatabase.MigrateDb(MySQLConnectionString);
+    MigrateDatabase.MigrateDb(MSSQLConnectionString);
     app.UseSwagger();
     app.UseSwaggerUI();
 }
