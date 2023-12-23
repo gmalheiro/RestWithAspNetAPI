@@ -1,5 +1,5 @@
 ﻿using EvolveDb;
-using MySqlConnector;
+using Microsoft.Data.SqlClient;
 using Serilog;
 
 namespace RestWithAspNetAPI.Data
@@ -10,7 +10,7 @@ namespace RestWithAspNetAPI.Data
         {
             try
             {
-                var evolveConnection = new MySqlConnection(connection);
+                var evolveConnection = new SqlConnection(connection);
                 var evolve = new Evolve(evolveConnection, msg => Log.Information(msg))
                 {
                     Locations = new List<string> { "Data/db/migrations", "Data/db/dataset" },
