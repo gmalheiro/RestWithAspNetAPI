@@ -29,7 +29,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-string MySQLConnectionString = builder?.Configuration?.GetConnectionString("MySQLConnectionString") ?? "";
+string PostgreSQLConnectionString= builder?.Configuration?.GetConnectionString("PostgreConnectionString") ?? "";
 
 var filterOptions = new HyperMediaFilterOptions();
 
@@ -70,10 +70,9 @@ builder?.Services?.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>))
 builder?.Services.AddScoped<PersonConverter>();
 builder?.Services.AddScoped<BookConverter>();
 
-builder?.Services.AddDbContext<MySQLContext>(options =>
-                                            options.UseMySql(MySQLConnectionString,
-                                            ServerVersion.AutoDetect(MySQLConnectionString)
-                                            ));
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
+builder?.Services.AddDbContext<PostgreSQLContext>(options =>options.UseNpgsql(PostgreSQLConnectionString));
 
 var tokenConfigurations = new TokenConfiguration();
 
@@ -130,7 +129,7 @@ var app = builder?.Build();
 // Configure the HTTP request pipeline.
 if (app?.Environment?.IsDevelopment() ?? true)
 {
-    MigrateDatabase.MigrateDb(MySQLConnectionString);
+    MigrateDatabase.MigrateDb(PostgreSQLConnectionString);
     app.UseSwagger();
     app.UseSwaggerUI();
 }
