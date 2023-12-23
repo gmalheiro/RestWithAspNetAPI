@@ -8,11 +8,11 @@ namespace RestWithAspNetAPI.Repository.Generic
     public class GenericRepository<T> : IRepository<T> where T : BaseEntity
     {
 
-        protected readonly MySQLContext _context;
+        protected readonly PostgreSQLContext _context;
 
         private DbSet<T> dataset;    
 
-        public GenericRepository(MySQLContext context)
+        public GenericRepository(PostgreSQLContext context)
         {
             _context = context;
             dataset = _context.Set<T>();
