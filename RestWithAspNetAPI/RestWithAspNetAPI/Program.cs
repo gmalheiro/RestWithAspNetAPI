@@ -70,7 +70,7 @@ builder?.Services?.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>))
 builder?.Services.AddScoped<PersonConverter>();
 builder?.Services.AddScoped<BookConverter>();
 
-builder?.Services.AddDbContext<MySQLContext>(options =>
+builder?.Services.AddDbContext<MSSQLContext>(options =>
                                             options.UseMySql(MySQLConnectionString,
                                             ServerVersion.AutoDetect(MySQLConnectionString)
                                             ));
