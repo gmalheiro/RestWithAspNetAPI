@@ -2,14 +2,14 @@
 
 namespace RestWithAspNetAPI.Models.Context
 {
-    public class MySQLContext: DbContext
+    public class PostgreSQLContext: DbContext
     {
-        public MySQLContext()
+        public PostgreSQLContext()
         {
             
         }
 
-        public MySQLContext(DbContextOptions <MySQLContext> options) :base(options) {}
+        public PostgreSQLContext(DbContextOptions <PostgreSQLContext> options) :base(options) {}
 
         public DbSet<Person> Persons { get; set; }
 
