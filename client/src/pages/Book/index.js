@@ -38,6 +38,82 @@ export default function Login (){
                         <FiTrash2 size={20} color='#251FC5'/>
                     </button>
                 </li>
+
+                <li>
+                    <strong>Title:</strong>
+                    <p>.NET Expert</p>
+                    <strong>Author:</strong>
+                    <p>Gabriel Malheiro</p>
+                    <strong>Price:</strong>
+                    <p>R$ 80,00</p>
+                    <strong>Release Date:</strong>
+                    <p>24/12/2023</p>
+
+                    <button type='button'>
+                        <FiEdit size={20} color='#251FC5'/>
+                    </button>
+
+                    <button type='button'>
+                        <FiTrash2 size={20} color='#251FC5'/>
+                    </button>
+                </li>
+
+                <li>
+                    <strong>Title:</strong>
+                    <p>.NET Expert</p>
+                    <strong>Author:</strong>
+                    <p>Gabriel Malheiro</p>
+                    <strong>Price:</strong>
+                    <p>R$ 80,00</p>
+                    <strong>Release Date:</strong>
+                    <p>24/12/2023</p>
+
+                    <button type='button'>
+                        <FiEdit size={20} color='#251FC5'/>
+                    </button>
+
+                    <button type='button'>
+                        <FiTrash2 size={20} color='#251FC5'/>
+                    </button>
+                </li>
+
+                <li>
+                    <strong>Title:</strong>
+                    <p>.NET Expert</p>
+                    <strong>Author:</strong>
+                    <p>Gabriel Malheiro</p>
+                    <strong>Price:</strong>
+                    <p>R$ 80,00</p>
+                    <strong>Release Date:</strong>
+                    <p>24/12/2023</p>
+
+                    <button type='button'>
+                        <FiEdit size={20} color='#251FC5'/>
+                    </button>
+
+                    <button type='button'>
+                        <FiTrash2 size={20} color='#251FC5'/>
+                    </button>
+                </li>
+
+                <li>
+                    <strong>Title:</strong>
+                    <p>.NET Expert</p>
+                    <strong>Author:</strong>
+                    <p>Gabriel Malheiro</p>
+                    <strong>Price:</strong>
+                    <p>R$ 80,00</p>
+                    <strong>Release Date:</strong>
+                    <p>24/12/2023</p>
+
+                    <button type='button'>
+                        <FiEdit size={20} color='#251FC5'/>
+                    </button>
+
+                    <button type='button'>
+                        <FiTrash2 size={20} color='#251FC5'/>
+                    </button>
+                </li>
             </ul>
             
             
