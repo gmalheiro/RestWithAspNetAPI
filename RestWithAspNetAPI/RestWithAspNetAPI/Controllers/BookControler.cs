@@ -28,7 +28,7 @@ namespace RestWithAspNetApi.Controllers
 
         // Maps GET requests to https://localhost:{port}/api/person
         // Get no parameters for FindAll -> Search All
-        [HttpGet("{sortDirection}/{pagesize/{page}}")]
+        [HttpGet("{sortDirection}/{pagesize}/{page}")]
         [ProducesResponseType(typeof(List<BookVO>), 200)]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
