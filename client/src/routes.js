@@ -2,6 +2,7 @@ import React from 'react';
 import {BrowserRouter, Route,Switch} from 'react-router-dom';
 
 import Login from './pages/Login';
+import Book from './pages/Book';
 
 
 export default function Routes() {
@@ -9,6 +10,7 @@ export default function Routes() {
         <BrowserRouter>
             <Switch>
                 <Route path="/" exact component={Login}/>
+                <Route path="/book" exact component={Book}/>
             </Switch>
         </BrowserRouter>
     );
