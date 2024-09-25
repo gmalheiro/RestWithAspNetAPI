@@ -1,4 +1,5 @@
 ﻿using RestWithAspNetAPI.Data.VO;
+using RestWithAspNetAPI.Hypermedia.Utils;
 using RestWithAspNetAPI.Models;
 
 namespace RestWithAspNetAPI.Business
@@ -13,6 +14,7 @@ namespace RestWithAspNetAPI.Business
 
         BookVO Update(BookVO book);
 
-        BookVO Delete(int id);    
+        BookVO Delete(int id);
+        PagedSearchVO<BookVO> FindWithPagedSearch(string? title, string sortDirection, int pageSize, int page);
     }
 }
